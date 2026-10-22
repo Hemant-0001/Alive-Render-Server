@@ -1,0 +1,16 @@
+
+name: Keep Render Server Alive
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render health endpoint
+        run: |
+          curl -fsS --max-time 30 \
+            "https://activate-license.onrender.com/health"
